@@ -42,9 +42,9 @@ public class ArrayOperations {
     }
 
     /**
-     * Creates another array of size equal to the shorter integer array and
-     * fills its elements by adding the pairwise elements of the two integer
-     * arrays.
+     * Creates another array of size equal to the shorter integer array( by
+     * calling the getShorterSize() method ) and fills its elements by adding
+     * the pairwise elements of the two integer arrays.
      *
      * @param a an integer array.
      * @param b an integer array.
@@ -61,9 +61,9 @@ public class ArrayOperations {
 
     /**
      *
-     * Creates another array of size equal to the shorter integer array and
-     * fills its elements by multiplying the pairwise elements of the two
-     * integer arrays.
+     * Creates another array of size equal to the shorter integer array( by
+     * calling the getShorterSize() method ) and fills its elements by adding
+     * the pairwise elements of the two integer arrays.
      *
      * @param a an integer array.
      * @param b an integer array
