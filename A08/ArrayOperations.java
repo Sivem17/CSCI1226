@@ -24,6 +24,24 @@ public class ArrayOperations {
     }
 
     /**
+     * Compares the two integer array and sets the size equal to the shorter
+     * array.
+     *
+     * @param a an integer array.
+     * @param b an integer array.
+     * @return size which is shorter.
+     */
+    private static int getShorterSize(int[] a, int[] b) {
+        int size;
+        if (a.length < b.length) {
+            size = a.length;
+        } else {
+            size = b.length;
+        }
+        return size;
+    }
+
+    /**
      * Creates another array of size equal to the shorter integer array and
      * fills its elements by adding the pairwise elements of the two integer
      * arrays.
@@ -33,12 +51,7 @@ public class ArrayOperations {
      * @return the new created array.
      */
     public static int[] add(int[] a, int[] b) {
-        int size;
-        if (a.length < b.length) {
-            size = a.length;
-        } else {
-            size = b.length;
-        }
+        int size = getShorterSize(a, b);
         int[] sumArray = new int[size];
         for (int i = 0; i < sumArray.length; i++) {
             sumArray[i] = a[i] + b[i];
@@ -57,12 +70,7 @@ public class ArrayOperations {
      * @return the new created array.
      */
     public static int[] multiply(int[] a, int[] b) {
-        int size;
-        if (a.length < b.length) {
-            size = a.length;
-        } else {
-            size = b.length;
-        }
+        int size = getShorterSize(a, b);
         int[] reqArray = new int[size];
         for (int i = 0; i < reqArray.length; i++) {
             reqArray[i] = a[i] * b[i];
@@ -98,6 +106,12 @@ public class ArrayOperations {
         if (a.length <= b.length) {
             for (int i = 0; i < a.length; i++) {
                 if (a[i] != b[i]) {
+                    return false;
+                }
+            }
+        } else if (b.length <= a.length) {
+            for (int i = 0; i < b.length; i++) {
+                if (b[i] != a[i]) {
                     return false;
                 }
             }
