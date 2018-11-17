@@ -43,38 +43,24 @@ public class BattleHorses {
         while (position[rHorse] <= NUM_SPACES) {
             roll = rollDie();
             System.out.println("what roll " + roll);
-//            board[position[rHorse]] = board[position[rHorse] - roll];
             position[rHorse] = position[rHorse] + roll;
             board[position[rHorse] - roll] = -1;
-            board[position[rHorse]] = board[position[rHorse] - roll];
             if (board[position[rHorse]] == -1) {
-//                board[position[rHorse]] = board[position[rHorse] - roll];
                 board[position[rHorse]] = position[rHorse];
                 System.out.println(nameHorses[rHorse - 1] + " rolls " + roll
                         + " ...  is at " + position[rHorse]);
                 System.out.println(board[position[rHorse] - roll]);
-//                board[position[rHorse]] = board[position[rHorse] - roll];
                 System.out.println(board[position[rHorse]]);
+            } else {
+                System.out.print(nameHorses[rHorse - 1] + " rolls " + roll);
+                while (board[position[rHorse]] != - 1) {
+                    position[rHorse] = position[rHorse] - 1;
+                   // rHorse = position[rHorse];
+                    System.out.print(" ... can't pass " + nameHorses[rHorse - 1]);
+                }
+                board[position[rHorse]] = position[rHorse];
+                System.out.print(" ... is at " + position[rHorse]);
 
-//        while (position[rHorse] <= NUM_SPACES) {
-//            roll = rollDie();
-//            if (board[position[rHorse] + roll] == -1) {
-//                position[rHorse] = position[rHorse] + roll;
-//                board[position[rHorse]] = position[rHorse];
-//                board[position[rHorse] - roll] = -1;
-//                System.out.println("." + board[position[rHorse]]);
-//                System.out.println("." + position[rHorse]);
-//                System.out.println(nameHorses[rHorse - 1] + " rolls " + roll
-//                        + " ...  is at " + position[rHorse]);
-//            } else {
-//                while (board[position[rHorse] + roll] != -1) {
-//                    position[rHorse] = position[rHorse] + (roll - 1);
-//                    if (position[rHorse] == -1) {
-//                        board[position[rHorse]] = position[rHorse];
-//                        System.out.println(nameHorses[rHorse - 1] + " rolls " + roll
-//                                + " ... can't pass " + rHorse++ + " ... is at " + position[rHorse]);
-//                    }
-//                }
             }
 //            if (position[rHorse] > board[position[NUM_HORSES - rHorse]]) {
 //                System.out.println(nameHorses[rHorse - 1] + " is in the lead.");
