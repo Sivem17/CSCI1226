@@ -23,50 +23,56 @@ public class BattleHorses {
         int[] position;
         int roll;
         int rHorse;
-
-        board = makeBoard();
-        position = new int[NUM_HORSES + DIE];
+        int newPosition;
 
         printIntro();
         getValidNumOfHorses();
-        int currentHorse = 1;
-        String[] nameHorses = getHorsesName(currentHorse);
+        String[] nameHorses = getHorsesName();
+
+        board = makeBoard();
+        position = new int[NUM_HORSES];
 
         System.out.print("\nThey're in the starting gate!\n\nPrese ENTER after "
                 + "each horse's turn.\nPress ENTER to start the race...");
         KBD.nextLine();
         System.out.println();
 
+        int posOfLeader;
         rHorse = R.nextInt(NUM_HORSES) + 1;
         System.out.println("which horse " + rHorse);
 
-        while (position[rHorse] <= NUM_SPACES) {
+        while (position[rHorse - 1] < NUM_SPACES) {
             roll = rollDie();
             System.out.println("what roll " + roll);
-            position[rHorse] = position[rHorse] + roll;
-            board[position[rHorse] - roll] = -1;
-            if (board[position[rHorse]] == -1) {
-                board[position[rHorse]] = position[rHorse];
+            newPosition = position[rHorse - 1] + roll;
+            board[newPosition - roll] = -1;
+            if (board[newPosition] == -1) {
+                posOfLeader = position[rHorse - 1];
+                position[rHorse - 1] = newPosition;
+                board[newPosition] = position[rHorse - 1];
                 System.out.println(nameHorses[rHorse - 1] + " rolls " + roll
-                        + " ...  is at " + position[rHorse]);
-                System.out.println(board[position[rHorse] - roll]);
-                System.out.println(board[position[rHorse]]);
+                        + " ...  is at " + newPosition);
+                if (newPosition > posOfLeader) {
+                    //posOfLeader = newPosition;
+                    System.out.println(nameHorses[rHorse - 1] + " is in the lead!");
+                }
+                System.out.println(board[position[rHorse - 1] - roll]);
+                System.out.println(board[position[rHorse - 1]]);
             } else {
                 System.out.print(nameHorses[rHorse - 1] + " rolls " + roll);
-                while (board[position[rHorse]] != - 1) {
-                    position[rHorse] = position[rHorse] - 1;
-                   // rHorse = position[rHorse];
+                while (board[newPosition] != - 1) {
+                    newPosition = newPosition - 1;
                     System.out.print(" ... can't pass " + nameHorses[rHorse - 1]);
                 }
-                board[position[rHorse]] = position[rHorse];
-                System.out.print(" ... is at " + position[rHorse]);
+                position[rHorse - 1] = newPosition;
+                board[position[rHorse - 1]] = position[rHorse - 1];
+                System.out.print(" ... is at " + position[rHorse - 1]);
+                System.out.println();
 
             }
-//            if (position[rHorse] > board[position[NUM_HORSES - rHorse]]) {
-//                System.out.println(nameHorses[rHorse - 1] + " is in the lead.");
-//            }
+
             printPause();
-            if (rHorse <= NUM_HORSES - 1) {
+            if (rHorse < NUM_HORSES) {
                 rHorse++;
             } else {
                 rHorse = 1;
@@ -74,12 +80,13 @@ public class BattleHorses {
         }
     }
 
-    private static String[] getHorsesName(int currentHorse) {
+    private static String[] getHorsesName() {
+        int horseNumber = 1;
         String[] nameHorses = new String[NUM_HORSES];
         for (int i = 0; i < NUM_HORSES; i++) {
-            System.out.print("What is horse #" + currentHorse + "'s name? ");
+            System.out.print("What is horse #" + horseNumber + "'s name? ");
             nameHorses[i] = KBD.nextLine();
-            currentHorse++;
+            horseNumber++;
         }
         return nameHorses;
     }
